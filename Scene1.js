@@ -14,7 +14,7 @@ create ()
     var text;
     var timedEvent;
       // 2:30 in seconds
-      this.initialTime = 2;
+      this.initialTime = 1;
 
       text = this.add.text(32, 32, 'Temps: ' + this.initialTime, {fontSize: '20px', fill:'#000'});
 
@@ -39,7 +39,7 @@ create ()
           text.setText('Temps: ' + formatTime(this.initialTime));
           }
           if(this.initialTime <= 0){
-              this.scene.start('troisieme_scene');
+              this.scene.start('quatrieme_scene');
           }
 
       }

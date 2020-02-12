@@ -14,7 +14,8 @@ class Scene2 extends Phaser.Scene {
     var carre_sel;
     var platforms;
     var test;
-        this.add.image(400, 300, 'background');
+    this.compteur = 0;
+    this.background = this.add.image(400, 300, 'background').setInteractive();
     test = this.physics.add.staticGroup();
     test.create(350, 450, 'test');
     platforms = this.physics.add.staticGroup();
@@ -26,17 +27,28 @@ class Scene2 extends Phaser.Scene {
       setXY: ({x: 10, y: 20, stepX: 70})
     });
     this.physics.add.collider(carre_sel, platforms);
-    this.physics.add.overlap(carre_sel, test, hitCarre, null);
+    this.physics.add.overlap(carre_sel, test, this.hitCarre, null, this);
     let children = carre_sel.getChildren();
 for(let i = 0; i < children.length; i++)
 {
     children[i].setInteractive();
 }
 
-function hitCarre(carre_sel, test){
-  carre_sel.disableBody(true, true);
-}
+
         this.input.on('pointerdown', this.startDrag, this);
+
+
+
+    }
+
+
+
+    hitCarre(carre1, test){
+      carre1.disableBody(true, true);
+      this.compteur;
+      this.compteur +=1;
+      console.log(this.compteur);
+
     }
 
 startDrag(pointer, targets){
@@ -56,11 +68,16 @@ stopDrag(){
   this.input.on('pointerdown', this.startDrag, this);
   this.input.off('pointermove', this.doDrag, this);
   this.input.off('pointerup', this.stopDrag, this);
+  this.background.x = 400;
+  this.background.y = 300;
+
 }
 
 
 
   update(){
-
+    if (this.compteur >=2) {
+      this.scene.start("cinquieme_scene");
+    }
   }
 }
